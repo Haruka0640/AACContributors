@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import izumiharuka.aaccontributors.R
-import izumiharuka.aaccontributors.data.source.Contributors
+import izumiharuka.aaccontributors.data.Contributors
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
