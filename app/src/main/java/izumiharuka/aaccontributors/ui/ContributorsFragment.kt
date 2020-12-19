@@ -30,7 +30,7 @@ class ContributorsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.list_item_contributors, container, false)
+        val view = inflater.inflate(R.layout.fragment_contributors, container, false)
 
         // Set the adapter
         if (view is RecyclerView) {

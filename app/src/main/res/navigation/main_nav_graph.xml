@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/contributorsFragment">
+
+    <fragment
+        android:id="@+id/contributorsFragment"
+        android:name="izumiharuka.aaccontributors.ui.ContributorsFragment"
+        android:label="fragment_contributors"
+        tools:layout="@layout/fragment_contributors" >
+        <action
+            android:id="@+id/action_contributorsFragment_to_contributorDetailFragment"
+            app:destination="@id/contributorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contributorDetailFragment"
+        android:name="izumiharuka.aaccontributors.ui.ContributorDetailFragment"
+        android:label="fragment_contributor_detail"
+        tools:layout="@layout/fragment_contributor_detail" />
+</navigation>

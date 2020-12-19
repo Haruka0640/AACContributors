@@ -19,7 +19,7 @@ class MyContributorsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_contributors, parent, false)
+            .inflate(R.layout.view_item_contributors, parent, false)
         return ViewHolder(view)
     }
 
