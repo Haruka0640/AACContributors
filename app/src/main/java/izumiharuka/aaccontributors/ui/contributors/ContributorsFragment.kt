@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import izumiharuka.aaccontributors.R
-import izumiharuka.aaccontributors.data.source.dummy.DummyContent
+import izumiharuka.aaccontributors.data.source.mock.ContributorsMockDataSource
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +39,7 @@ class ContributorsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyContributorsRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MyContributorsRecyclerViewAdapter(ContributorsMockDataSource.getContributors())
             }
         }
         return view

@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import izumiharuka.aaccontributors.R
-
-import izumiharuka.aaccontributors.data.source.dummy.DummyContent.DummyItem
+import izumiharuka.aaccontributors.data.source.Contributors
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class MyContributorsRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    private val values: List<Contributors>
 ) : RecyclerView.Adapter<MyContributorsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +24,6 @@ class MyContributorsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
     }
 
     override fun getItemCount(): Int = values.size
