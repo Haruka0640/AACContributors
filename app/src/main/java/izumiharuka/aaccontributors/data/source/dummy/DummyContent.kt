@@ -1,4 +1,4 @@
-package izumiharuka.aaccontributors.ui.dummy
+package izumiharuka.aaccontributors.data.source.dummy
 
 import java.util.ArrayList
 import java.util.HashMap
