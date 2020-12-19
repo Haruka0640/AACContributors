@@ -1,4 +1,4 @@
-package izumiharuka.aaccontributors.ui
+package izumiharuka.aaccontributors.ui.contributorsdetail
 
 import androidx.lifecycle.ViewModel
 

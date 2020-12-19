@@ -1,4 +1,4 @@
-package izumiharuka.aaccontributors.ui
+package izumiharuka.aaccontributors.ui.contributors
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

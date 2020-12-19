@@ -1,4 +1,4 @@
-package izumiharuka.aaccontributors.ui
+package izumiharuka.aaccontributors.ui.contributors
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
