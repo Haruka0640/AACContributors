@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import izumiharuka.aaccontributors.R
-import izumiharuka.aaccontributors.data.source.mock.ContributorsMockDataSource
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A fragment representing a list of Items.
@@ -17,6 +17,10 @@ import izumiharuka.aaccontributors.data.source.mock.ContributorsMockDataSource
 class ContributorsFragment : Fragment() {
 
     private var columnCount = 1
+
+    private val viewModel: ContributorsViewModel by viewModel()
+
+    private lateinit var adapter: ContributorsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,13 @@ class ContributorsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyContributorsRecyclerViewAdapter(ContributorsMockDataSource.getContributors())
+                adapter = ContributorsListAdapter().also { this.adapter = it }
+            }
+        }
+
+        viewModel.contributors.observe(viewLifecycleOwner){
+            if(it != null && ::adapter.isInitialized){
+                adapter.submitList(it)
             }
         }
         return view

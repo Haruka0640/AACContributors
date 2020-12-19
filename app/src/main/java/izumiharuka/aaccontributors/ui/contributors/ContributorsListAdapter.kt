@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.data.Contributors
 
@@ -12,9 +14,19 @@ import izumiharuka.aaccontributors.data.Contributors
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MyContributorsRecyclerViewAdapter(
-    private val values: List<Contributors>
-) : RecyclerView.Adapter<MyContributorsRecyclerViewAdapter.ViewHolder>() {
+class ContributorsListAdapter() : ListAdapter<Contributors, ContributorsListAdapter.ViewHolder>(
+    object: DiffUtil.ItemCallback<Contributors>() {
+        override fun areItemsTheSame(
+            oldItem: Contributors,
+            newItem: Contributors
+        ): Boolean = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(
+            oldItem: Contributors,
+            newItem: Contributors
+        ): Boolean = oldItem == newItem
+    }
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,10 +35,8 @@ class MyContributorsRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-    }
 
-    override fun getItemCount(): Int = values.size
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val idView: TextView = view.findViewById(R.id.item_number)

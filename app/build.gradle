@@ -5,16 +5,16 @@ plugins {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    buildToolsVersion '29.0.3'
 
     defaultConfig {
-        applicationId "izumiharuka.aaccontributors"
+        applicationId 'izumiharuka.aaccontributors'
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -24,14 +24,14 @@ android {
         }
     }
 
-    flavorDimensions "datasource"
+    flavorDimensions 'datasource'
     productFlavors {
         mock {
-            dimension "datasource"
-            applicationIdSuffix = ".mock"
+            dimension 'datasource'
+            applicationIdSuffix = '.mock'
         }
         prod {
-            dimension "datasource"
+            dimension 'datasource'
         }
     }
 
@@ -52,12 +52,15 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    implementation 'org.koin:koin-android:1.0.2'
 
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.2"
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.2"
-    implementation "androidx.navigation:navigation-compose:1.0.0-alpha04"
+    implementation 'org.koin:koin-android:1.0.2'
+    implementation 'org.koin:koin-androidx-scope:1.0.2'
+    implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-dynamic-features-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-compose:1.0.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
@@ -67,10 +70,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit-mock:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:4.7.2"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
 
-    androidTestImplementation "androidx.navigation:navigation-testing:2.3.2"
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.3.2'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -1,7 +1,6 @@
 package izumiharuka.aaccontributors
 
 import android.app.Application
-import izumiharuka.aaccontributors.data.DataSourceModule
 import org.koin.android.ext.android.startKoin
 
 class AACContributors : Application() {
@@ -11,7 +10,7 @@ class AACContributors : Application() {
 
         startKoin(
             this, listOf(
-                DataSourceModule
+                Modules
             )
         )
     }
