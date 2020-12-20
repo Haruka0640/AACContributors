@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import izumiharuka.aaccontributors.data.Account
+import izumiharuka.aaccontributors.data.AccountDetail
 import izumiharuka.aaccontributors.data.GitHubRepository
 import izumiharuka.aaccontributors.data.Repository
+import izumiharuka.aaccontributors.utils.Event
 import kotlinx.coroutines.launch
 
 class ContributorsViewModel(
@@ -22,8 +24,11 @@ class ContributorsViewModel(
     private val _repository = MutableLiveData<Result<Repository>>()
     val repository: LiveData<Result<Repository>> = _repository
 
-    private val _selectedContributor = MutableLiveData<Account>()
-    val selectedContributor: LiveData<Account> = _selectedContributor
+    private val _contributorSelectedEvent = MutableLiveData<Event<Account>>()
+    val contributorSelectedEvent: LiveData<Event<Account>> = _contributorSelectedEvent
+
+    private val _accountDetail = MutableLiveData<Result<AccountDetail>>()
+    val accountDetail: LiveData<Result<AccountDetail>> = _accountDetail
 
     fun getInfo(){
         getRepositoryContributors()
@@ -55,8 +60,19 @@ class ContributorsViewModel(
         }
     }
 
-    fun selectContributor(contributor: Account){
-        _selectedContributor.postValue(contributor)
+    fun getAccountDetail(){
+        val login = _contributorSelectedEvent.value?.peekContent()?.login ?: return
+        viewModelScope.launch {
+            kotlin.runCatching {
+                gitHubRepository.getAccountDetail(login)
+            }.let{
+                _accountDetail.postValue(it)
+            }
+        }
+    }
+
+    fun notifyContributorSelected(contributor: Account){
+        _contributorSelectedEvent.postValue(Event(contributor))
     }
 
     companion object {

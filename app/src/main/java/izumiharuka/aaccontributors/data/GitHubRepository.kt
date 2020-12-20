@@ -10,4 +10,7 @@ class GitHubRepository(
 
     suspend fun getRepository(owner: String, repo: String): Repository =
         dataSource.getRepository(owner, repo)
+
+    suspend fun getAccountDetail(login: String): AccountDetail =
+        dataSource.getAccountDetail(login)
 }

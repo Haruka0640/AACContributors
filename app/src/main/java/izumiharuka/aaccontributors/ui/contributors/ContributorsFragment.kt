@@ -47,7 +47,7 @@ class ContributorsFragment : Fragment() {
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = ContributorsListAdapter {
-                    viewModel.selectContributor(it)
+                    viewModel.notifyContributorSelected(it)
                 }.also {
                     this@ContributorsFragment.adapter = it
                 }
@@ -83,7 +83,7 @@ class ContributorsFragment : Fragment() {
             )
         }
 
-        viewModel.selectedContributor.observe(viewLifecycleOwner) {
+        viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
             bottomSheetBehavior.state = STATE_COLLAPSED
         }
     }

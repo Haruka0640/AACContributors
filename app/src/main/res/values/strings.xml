@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">AAC Contributors</string>
 
+    <string name="contributors_name">Name: %s</string>
+    <string name="contributors_company">Company: %s</string>
+    <string name="contributors_location">Location: %s</string>
+    <string name="contributors_mail">Mail: %s</string>
+    <string name="contributors_twitter">/@%s</string>
+    <string name="contributors_github">Open Github</string>
     <string name="error_api_common">Failed to request</string>
     <string name="error_api_get_contributors_common">Failed to load contributors</string>
     <string name="error_api_get_repository_common">Failed to load repository</string>

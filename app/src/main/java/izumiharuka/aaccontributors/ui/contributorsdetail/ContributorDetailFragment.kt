@@ -9,6 +9,7 @@ import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorDetailBinding
 import izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel
 import izumiharuka.aaccontributors.utils.autoCleared
+import izumiharuka.aaccontributors.utils.showErrorMessage
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ContributorDetailFragment : Fragment() {
@@ -28,8 +29,16 @@ class ContributorDetailFragment : Fragment() {
             lifecycleOwner = this@ContributorDetailFragment
         }
 
-        viewModel.selectedContributor.observe(viewLifecycleOwner) {
-            binding.contributor = it
+        viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
+            viewModel.getAccountDetail()
+        }
+
+        viewModel.accountDetail.observe(viewLifecycleOwner) { result ->
+            result?.fold(
+                onSuccess = { binding.contributor = it },
+                onFailure = { showErrorMessage(it){ viewModel.getAccountDetail() } }
+            )
+
         }
     }
 
