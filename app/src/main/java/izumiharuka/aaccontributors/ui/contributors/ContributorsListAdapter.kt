@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import izumiharuka.aaccontributors.data.Contributor
 import izumiharuka.aaccontributors.databinding.ViewItemContributorsBinding
 
@@ -38,8 +39,11 @@ class ContributorsListAdapter(
         private val binding: ViewItemContributorsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contributor: Contributor) {
-            binding.contributor = contributor
-            binding.root.setOnClickListener { onItemClickListener.invoke(contributor) }
+            binding.apply {
+                this.contributor = contributor
+                root.setOnClickListener { onItemClickListener.invoke(contributor) }
+                Glide.with(root.context).load(contributor.avatarUrl).into(imageAvatar)
+            }
         }
     }
 }
