@@ -10,13 +10,5 @@
         android:name="izumiharuka.aaccontributors.ui.contributors.ContributorsFragment"
         android:label="fragment_contributors"
         tools:layout="@layout/fragment_contributors" >
-        <action
-            android:id="@+id/action_contributorsFragment_to_contributorDetailFragment"
-            app:destination="@id/contributorDetailFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/contributorDetailFragment"
-        android:name="izumiharuka.aaccontributors.ui.contributorsdetail.ContributorDetailFragment"
-        android:label="fragment_contributor_detail"
-        tools:layout="@layout/fragment_contributor_detail" />
 </navigation>

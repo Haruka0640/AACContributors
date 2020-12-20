@@ -1,32 +1,37 @@
 package izumiharuka.aaccontributors.ui.contributorsdetail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import izumiharuka.aaccontributors.R
+import izumiharuka.aaccontributors.databinding.FragmentContributorDetailBinding
+import izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel
+import izumiharuka.aaccontributors.utils.autoCleared
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ContributorDetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ContributorDetailFragment()
-    }
+    private val viewModel: ContributorsViewModel by sharedViewModel()
 
-    private lateinit var viewModel: ContributorDetailViewModel
+    private var binding: FragmentContributorDetailBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_contributor_detail, container, false)
+    ): View? =
+        inflater.inflate(R.layout.fragment_contributor_detail, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding = FragmentContributorDetailBinding.bind(view).apply {
+            lifecycleOwner = this@ContributorDetailFragment
+        }
+
+        viewModel.selectedContributor.observe(viewLifecycleOwner) {
+            binding.contributor = it
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ContributorDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

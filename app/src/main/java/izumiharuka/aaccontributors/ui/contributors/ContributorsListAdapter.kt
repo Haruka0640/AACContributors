@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import izumiharuka.aaccontributors.data.Contributor
 import izumiharuka.aaccontributors.databinding.ViewItemContributorsBinding
 
-class ContributorsListAdapter : ListAdapter<Contributor, ContributorsListAdapter.ViewHolder>(
+class ContributorsListAdapter(
+    private val onItemClickListener: (Contributor) -> Unit
+) : ListAdapter<Contributor, ContributorsListAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Contributor>() {
         override fun areItemsTheSame(
             oldItem: Contributor,
@@ -37,6 +39,7 @@ class ContributorsListAdapter : ListAdapter<Contributor, ContributorsListAdapter
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contributor: Contributor) {
             binding.contributor = contributor
+            binding.root.setOnClickListener { onItemClickListener.invoke(contributor) }
         }
     }
 }

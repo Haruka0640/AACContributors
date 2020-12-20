@@ -17,6 +17,9 @@ class ContributorsViewModel(
     private val _contributors = MutableLiveData<Result<List<Contributor>>>()
     val contributors: LiveData<Result<List<Contributor>>> = _contributors
 
+    private val _selectedContributor = MutableLiveData<Contributor>()
+    val selectedContributor: LiveData<Contributor> = _selectedContributor
+
     fun getContributors(repositoryId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -25,5 +28,9 @@ class ContributorsViewModel(
                 _contributors.postValue(it)
             }
         }
+    }
+
+    fun select(contributor: Contributor){
+        _selectedContributor.postValue(contributor)
     }
 }
