@@ -8,7 +8,7 @@ import retrofit2.http.Path
 interface GitHubApi{
 
     @GET("/repos/{owner}/{repo}/contributors")
-    suspend fun getContributors(
+    suspend fun getRepositoryContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String
     ): List<Account>

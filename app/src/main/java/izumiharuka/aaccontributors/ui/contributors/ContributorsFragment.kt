@@ -63,7 +63,7 @@ class ContributorsFragment : Fragment() {
                         messageText = R.string.error_api_get_contributors_common
                     )
                     {
-                        viewModel.getContributorsInfo()
+                        viewModel.getRepositoryContributors()
                     }
                 }
             )

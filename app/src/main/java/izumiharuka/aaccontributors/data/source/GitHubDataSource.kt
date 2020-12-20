@@ -5,7 +5,7 @@ import izumiharuka.aaccontributors.data.Repository
 
 interface GitHubDataSource {
 
-    suspend fun getContributors(owner: String, repo: String): List<Account>
+    suspend fun getRepositoryContributors(owner: String, repo: String): List<Account>
 
     suspend fun getRepository(owner: String, repo:String): Repository
 

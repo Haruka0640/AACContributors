@@ -26,7 +26,7 @@ class ContributorsViewModel(
     val selectedContributor: LiveData<Account> = _selectedContributor
 
     fun getInfo(){
-        getContributorsInfo()
+        getRepositoryContributors()
         getRepositoryInfo()
     }
 
@@ -43,12 +43,12 @@ class ContributorsViewModel(
         }
     }
 
-    fun getContributorsInfo() {
+    fun getRepositoryContributors() {
         val owner = _activeRepo.value?.first ?: return
         val repo = _activeRepo.value?.second ?: return
         viewModelScope.launch {
             kotlin.runCatching {
-                gitHubRepository.getContributors(owner, repo)
+                gitHubRepository.getRepositoryContributors(owner, repo)
             }.let{
                 _contributors.postValue(it)
             }
