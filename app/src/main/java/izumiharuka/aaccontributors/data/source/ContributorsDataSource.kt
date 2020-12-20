@@ -1,10 +1,9 @@
 package izumiharuka.aaccontributors.data.source
 
-import izumiharuka.aaccontributors.data.Contributors
-import retrofit2.Retrofit
+import izumiharuka.aaccontributors.data.Contributor
 
 interface ContributorsDataSource {
 
-    fun getContributors(repositoryId: Int): List<Contributors>
+    suspend fun getContributors(repositoryId: Int): List<Contributor>
 
 }

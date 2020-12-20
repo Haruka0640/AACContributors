@@ -3,17 +3,27 @@ package izumiharuka.aaccontributors.ui.contributors
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import izumiharuka.aaccontributors.data.Contributors
+import androidx.lifecycle.viewModelScope
+import izumiharuka.aaccontributors.data.Contributor
 import izumiharuka.aaccontributors.data.ContributorsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ContributorsViewModel(
     private val contributorsRepository: ContributorsRepository
 ): ViewModel() {
 
-    private val _contributors = MutableLiveData<List<Contributors>>()
-    val contributors: LiveData<List<Contributors>> = _contributors
+    private val _contributors = MutableLiveData<Result<List<Contributor>>>()
+    val contributors: LiveData<Result<List<Contributor>>> = _contributors
 
     fun getContributors(repositoryId: Int) {
-        _contributors.value = contributorsRepository.getContributors(repositoryId)
+        viewModelScope.launch {
+            kotlin.runCatching {
+                contributorsRepository.getContributors(repositoryId)
+            }.let{
+                _contributors.postValue(it)
+            }
+        }
     }
 }

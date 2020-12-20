@@ -1,60 +1,59 @@
 package izumiharuka.aaccontributors
 
-import com.squareup.moshi.Moshi
-import izumiharuka.aaccontributors.data.Contributors
-import izumiharuka.aaccontributors.data.listAdapter
+import izumiharuka.aaccontributors.data.Contributor
 import izumiharuka.aaccontributors.data.source.ContributorsDataSource
+import izumiharuka.aaccontributors.data.source.remote.ContributorsApi
 import retrofit2.mock.MockRetrofit
 
 object Injection {
 
-    fun provideContributorsDataSource(mockRetrofit: MockRetrofit, moshi: Moshi) =
+    fun provideContributorsDataSource(mockRetrofit: MockRetrofit) =
         object : ContributorsDataSource {
-            override fun getContributors(repositoryId: Int): List<Contributors> =
-                mockRetrofit.create(ContributorsDataSource::class.java).returningResponse(
-                    moshi.listAdapter(Contributors::class.java).fromJson(
-                        "{\n" +
-                            "    \"login\": \"ianhanniballake\",\n" +
-                            "    \"id\": 517315,\n" +
-                            "    \"node_id\": \"MDQ6VXNlcjUxNzMxNQ==\",\n" +
-                            "    \"avatar_url\": \"https://avatars1.githubusercontent.com/u/517315?v=4\",\n" +
-                            "    \"gravatar_id\": \"\",\n" +
-                            "    \"url\": \"https://api.github.com/users/ianhanniballake\",\n" +
-                            "    \"html_url\": \"https://github.com/ianhanniballake\",\n" +
-                            "    \"followers_url\": \"https://api.github.com/users/ianhanniballake/followers\",\n" +
-                            "    \"following_url\": \"https://api.github.com/users/ianhanniballake/following{/other_user}\",\n" +
-                            "    \"gists_url\": \"https://api.github.com/users/ianhanniballake/gists{/gist_id}\",\n" +
-                            "    \"starred_url\": \"https://api.github.com/users/ianhanniballake/starred{/owner}{/repo}\",\n" +
-                            "    \"subscriptions_url\": \"https://api.github.com/users/ianhanniballake/subscriptions\",\n" +
-                            "    \"organizations_url\": \"https://api.github.com/users/ianhanniballake/orgs\",\n" +
-                            "    \"repos_url\": \"https://api.github.com/users/ianhanniballake/repos\",\n" +
-                            "    \"events_url\": \"https://api.github.com/users/ianhanniballake/events{/privacy}\",\n" +
-                            "    \"received_events_url\": \"https://api.github.com/users/ianhanniballake/received_events\",\n" +
-                            "    \"type\": \"User\",\n" +
-                            "    \"site_admin\": false,\n" +
-                            "    \"contributions\": 118\n" +
-                            "  },\n" +
-                            "  {\n" +
-                            "    \"login\": \"dlam\",\n" +
-                            "    \"id\": 831038,\n" +
-                            "    \"node_id\": \"MDQ6VXNlcjgzMTAzOA==\",\n" +
-                            "    \"avatar_url\": \"https://avatars3.githubusercontent.com/u/831038?v=4\",\n" +
-                            "    \"gravatar_id\": \"\",\n" +
-                            "    \"url\": \"https://api.github.com/users/dlam\",\n" +
-                            "    \"html_url\": \"https://github.com/dlam\",\n" +
-                            "    \"followers_url\": \"https://api.github.com/users/dlam/followers\",\n" +
-                            "    \"following_url\": \"https://api.github.com/users/dlam/following{/other_user}\",\n" +
-                            "    \"gists_url\": \"https://api.github.com/users/dlam/gists{/gist_id}\",\n" +
-                            "    \"starred_url\": \"https://api.github.com/users/dlam/starred{/owner}{/repo}\",\n" +
-                            "    \"subscriptions_url\": \"https://api.github.com/users/dlam/subscriptions\",\n" +
-                            "    \"organizations_url\": \"https://api.github.com/users/dlam/orgs\",\n" +
-                            "    \"repos_url\": \"https://api.github.com/users/dlam/repos\",\n" +
-                            "    \"events_url\": \"https://api.github.com/users/dlam/events{/privacy}\",\n" +
-                            "    \"received_events_url\": \"https://api.github.com/users/dlam/received_events\",\n" +
-                            "    \"type\": \"User\",\n" +
-                            "    \"site_admin\": false,\n" +
-                            "    \"contributions\": 74\n" +
-                            "  },"
+            override suspend fun getContributors(repositoryId: Int): List<Contributor> =
+                mockRetrofit.create(ContributorsApi::class.java).returningResponse(
+                    listOf(
+                        Contributor(
+                            login = "ianhanniballake",
+                            id = 517315,
+                            nodeId = "MDQ6VXNlcjUxNzMxNQ==",
+                            avatarUrl = "https://avatars1.githubusercontent.com/u/517315?v=4",
+                            gravatarId = "",
+                            url = "https://api.github.com/users/ianhanniballake",
+                            htmlUrl = "https://github.com/ianhanniballake",
+                            followersUrl = "https://api.github.com/users/ianhanniballake/followers",
+                            followingUrl = "https://api.github.com/users/ianhanniballake/following{/otherUser}",
+                            gistsUrl = "https://api.github.com/users/ianhanniballake/gists{/gist_id}",
+                            starredUrl = "https://api.github.com/users/ianhanniballake/starred{/owner}{/repo}",
+                            subscriptionsUrl = "https://api.github.com/users/ianhanniballake/subscriptions",
+                            organizationsUrl = "https://api.github.com/users/ianhanniballake/orgs",
+                            reposUrl = "https://api.github.com/users/ianhanniballake/repos",
+                            eventsUrl = "https://api.github.com/users/ianhanniballake/events{/privacy}",
+                            receivedEventsUrl = "https://api.github.com/users/ianhanniballake/received_events",
+                            type = "User",
+                            siteAdmin= false,
+                            contributions = 118
+                        ),
+                        Contributor(
+                            login = "ianhanniballake",
+                            id = 517315,
+                            nodeId = "MDQ6VXNlcjUxNzMxNQ==",
+                            avatarUrl = "https://avatars1.githubusercontent.com/u/517315?v=4",
+                            gravatarId = "",
+                            url = "https://api.github.com/users/ianhanniballake",
+                            htmlUrl = "https://github.com/ianhanniballake",
+                            followersUrl = "https://api.github.com/users/ianhanniballake/followers",
+                            followingUrl = "https://api.github.com/users/ianhanniballake/following{/otherUser}",
+                            gistsUrl = "https://api.github.com/users/ianhanniballake/gists{/gist_id}",
+                            starredUrl = "https://api.github.com/users/ianhanniballake/starred{/owner}{/repo}",
+                            subscriptionsUrl = "https://api.github.com/users/ianhanniballake/subscriptions",
+                            organizationsUrl = "https://api.github.com/users/ianhanniballake/orgs",
+                            reposUrl = "https://api.github.com/users/ianhanniballake/repos",
+                            eventsUrl = "https://api.github.com/users/ianhanniballake/events{/privacy}",
+                            receivedEventsUrl = "https://api.github.com/users/ianhanniballake/received_events",
+                            type = "User",
+                            siteAdmin= false,
+                            contributions = 118
+                        )
                     )
                 ).getContributors(repositoryId)
         }

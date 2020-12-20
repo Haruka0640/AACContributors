@@ -43,7 +43,7 @@ val Modules = module {
             .build()
     }
 
-    single { Injection.provideContributorsDataSource(get(), get()) }
+    single { Injection.provideContributorsDataSource(get()) }
 
     single { ContributorsRepository(get()) }
 
