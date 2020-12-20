@@ -9,7 +9,7 @@ object Injection {
 
     fun provideContributorsDataSource(mockRetrofit: MockRetrofit) =
         object : ContributorsDataSource {
-            override suspend fun getContributors(repositoryId: Int): List<Contributor> =
+            override suspend fun getContributors(owner: String, repo: String): List<Contributor> =
                 mockRetrofit.create(ContributorsApi::class.java).returningResponse(
                     listOf(
                         Contributor(
@@ -55,6 +55,6 @@ object Injection {
                             contributions = 118
                         )
                     )
-                ).getContributors(repositoryId)
+                ).getContributors(owner, repo)
         }
 }

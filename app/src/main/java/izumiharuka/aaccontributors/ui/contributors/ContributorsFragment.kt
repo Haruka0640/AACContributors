@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.snackbar.Snackbar
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
@@ -56,7 +57,15 @@ class ContributorsFragment : Fragment() {
         viewModel.contributors.observe(viewLifecycleOwner) { result ->
             result?.fold(
                 onSuccess = { adapter.submitList(it) },
-                onFailure = { TODO() }
+                onFailure = {
+                    Snackbar.make(
+                        binding.root,
+                        R.string.error_api_get_contributors_unknown,
+                        Snackbar.LENGTH_LONG
+                    ).setAction(R.string.retry) {
+                        viewModel.getInfo()
+                    }.show()
+                }
             )
         }
 
@@ -67,10 +76,6 @@ class ContributorsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getContributors(DEFAULT_REPOSITORY_ID)
-    }
-
-    companion object {
-        const val DEFAULT_REPOSITORY_ID = 90792131
+        viewModel.getInfo()
     }
 }

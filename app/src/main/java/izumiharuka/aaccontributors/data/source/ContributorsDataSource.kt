@@ -4,6 +4,6 @@ import izumiharuka.aaccontributors.data.Contributor
 
 interface ContributorsDataSource {
 
-    suspend fun getContributors(repositoryId: Int): List<Contributor>
+    suspend fun getContributors(owner: String, repo: String): List<Contributor>
 
 }

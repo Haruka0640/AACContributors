@@ -9,8 +9,9 @@ import retrofit2.http.Path
 
 interface ContributorsApi{
 
-    @GET("repositories/{repositoryId}/contributors")
+    @GET("/repos/{owner}/{repo}/contributors")
     suspend fun getContributors(
-        @Path("repositoryId") repositoryId: Int
+        @Path("owner") owner: String,
+        @Path("repo") repo: String
     ): List<Contributor>
 }

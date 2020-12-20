@@ -5,6 +5,6 @@ import izumiharuka.aaccontributors.data.source.ContributorsDataSource
 class ContributorsRepository(
     private val dataSource: ContributorsDataSource
 ) {
-    suspend fun getContributors(repositoryId: Int): List<Contributor> =
-        dataSource.getContributors(repositoryId)
+    suspend fun getContributors(owner: String, repo: String): List<Contributor> =
+        dataSource.getContributors(owner, repo)
 }

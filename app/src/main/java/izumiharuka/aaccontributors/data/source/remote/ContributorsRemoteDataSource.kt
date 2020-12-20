@@ -5,6 +5,7 @@ import izumiharuka.aaccontributors.data.source.ContributorsDataSource
 
 class ContributorsRemoteDataSource(
     private val api: ContributorsApi
-): ContributorsDataSource {
-    override suspend fun getContributors(repositoryId: Int): List<Contributor> = api.getContributors(repositoryId)
+) : ContributorsDataSource {
+    override suspend fun getContributors(owner: String, repo: String): List<Contributor> =
+        api.getContributors(owner, repo)
 }
