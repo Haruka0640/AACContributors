@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import izumiharuka.aaccontributors.data.Account
-import izumiharuka.aaccontributors.data.ContributorsRepository
+import izumiharuka.aaccontributors.data.GitHubRepository
 import kotlinx.coroutines.launch
 
 class ContributorsViewModel(
-    private val contributorsRepository: ContributorsRepository
+    private val contributorsRepository: GitHubRepository
 ): ViewModel() {
 
     private val _activeRepo = MutableLiveData(Pair(DEFAULT_OWNER, DEFAULT_REPO))

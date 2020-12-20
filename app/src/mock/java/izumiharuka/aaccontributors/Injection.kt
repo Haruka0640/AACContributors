@@ -1,18 +1,18 @@
 package izumiharuka.aaccontributors
 
-import izumiharuka.aaccontributors.data.Contributor
-import izumiharuka.aaccontributors.data.source.ContributorsDataSource
-import izumiharuka.aaccontributors.data.source.remote.ContributorsApi
+import izumiharuka.aaccontributors.data.Account
+import izumiharuka.aaccontributors.data.source.GitHubDataSource
+import izumiharuka.aaccontributors.data.source.remote.GitHubApi
 import retrofit2.mock.MockRetrofit
 
 object Injection {
 
     fun provideContributorsDataSource(mockRetrofit: MockRetrofit) =
-        object : ContributorsDataSource {
-            override suspend fun getContributors(owner: String, repo: String): List<Contributor> =
-                mockRetrofit.create(ContributorsApi::class.java).returningResponse(
+        object : GitHubDataSource {
+            override suspend fun getContributors(owner: String, repo: String): List<Account> =
+                mockRetrofit.create(GitHubApi::class.java).returningResponse(
                     listOf(
-                        Contributor(
+                        Account(
                             login = "ianhanniballake",
                             id = 517315,
                             nodeId = "MDQ6VXNlcjUxNzMxNQ==",
@@ -33,7 +33,7 @@ object Injection {
                             siteAdmin= false,
                             contributions = 118
                         ),
-                        Contributor(
+                        Account(
                             login = "ianhanniballake",
                             id = 517315,
                             nodeId = "MDQ6VXNlcjUxNzMxNQ==",

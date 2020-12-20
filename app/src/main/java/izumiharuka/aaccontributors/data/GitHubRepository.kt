@@ -1,9 +1,9 @@
 package izumiharuka.aaccontributors.data
 
-import izumiharuka.aaccontributors.data.source.ContributorsDataSource
+import izumiharuka.aaccontributors.data.source.GitHubDataSource
 
-class ContributorsRepository(
-    private val dataSource: ContributorsDataSource
+class GitHubRepository(
+    private val dataSource: GitHubDataSource
 ) {
     suspend fun getContributors(owner: String, repo: String): List<Account> =
         dataSource.getContributors(owner, repo)

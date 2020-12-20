@@ -5,7 +5,7 @@ import izumiharuka.aaccontributors.data.Repository
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ContributorsApi{
+interface GitHubApi{
 
     @GET("/repos/{owner}/{repo}/contributors")
     suspend fun getContributors(

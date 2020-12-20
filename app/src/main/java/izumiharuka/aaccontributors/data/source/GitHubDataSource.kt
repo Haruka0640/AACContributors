@@ -3,7 +3,7 @@ package izumiharuka.aaccontributors.data.source
 import izumiharuka.aaccontributors.data.Account
 import izumiharuka.aaccontributors.data.Repository
 
-interface ContributorsDataSource {
+interface GitHubDataSource {
 
     suspend fun getContributors(owner: String, repo: String): List<Account>
 

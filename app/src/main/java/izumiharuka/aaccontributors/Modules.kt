@@ -2,7 +2,7 @@ package izumiharuka.aaccontributors
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import izumiharuka.aaccontributors.data.ContributorsRepository
+import izumiharuka.aaccontributors.data.GitHubRepository
 import izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +45,7 @@ val Modules = module {
 
     single { Injection.provideContributorsDataSource(get()) }
 
-    single { ContributorsRepository(get()) }
+    single { GitHubRepository(get()) }
 
     viewModel { ContributorsViewModel(get()) }
 }
