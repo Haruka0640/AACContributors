@@ -1,6 +1,7 @@
 package izumiharuka.aaccontributors.ui.contributors
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ class ContributorsFragment : Fragment() {
             result?.fold(
                 onSuccess = { adapter.submitList(it) },
                 onFailure = {
+                    Log.e("error", "", it)
                     showErrorMessage(
                         view = binding.coordinator,
                         messageText = R.string.error_api_get_contributors_common
