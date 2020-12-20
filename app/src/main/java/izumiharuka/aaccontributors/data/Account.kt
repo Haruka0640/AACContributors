@@ -1,8 +1,11 @@
 package izumiharuka.aaccontributors.data
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Account(
     @Json(name = "avatar_url")
@@ -43,4 +46,4 @@ data class Account(
     val type: String,
     @Json(name = "url")
     val url: String
-)
+): Parcelable

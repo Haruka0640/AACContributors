@@ -21,12 +21,6 @@ class ContributorsViewModel(
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
 
-    private val _contributorSelectedEvent = MutableLiveData<Event<Account>>()
-    val contributorSelectedEvent: LiveData<Event<Account>> = _contributorSelectedEvent
-
-    private val _accountDetail = MutableLiveData<Result<AccountDetail>>()
-    val accountDetail: LiveData<Result<AccountDetail>> = _accountDetail
-
     fun getInfo(){
         getRepositoryContributors()
     }
@@ -41,21 +35,6 @@ class ContributorsViewModel(
                 _contributors.postValue(it)
             }
         }
-    }
-
-    fun getAccountDetail(){
-        val login = _contributorSelectedEvent.value?.peekContent()?.login ?: return
-        viewModelScope.launch {
-            kotlin.runCatching {
-                gitHubRepository.getAccountDetail(login)
-            }.let{
-                _accountDetail.postValue(it)
-            }
-        }
-    }
-
-    fun notifyContributorSelected(contributor: Account){
-        _contributorSelectedEvent.postValue(Event(contributor))
     }
 
     companion object {

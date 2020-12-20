@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
@@ -14,19 +16,18 @@ import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
 import izumiharuka.aaccontributors.utils.showErrorMessage
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A fragment representing a list of Items.
  */
 class ContributorsFragment : Fragment() {
 
-    private val viewModel: ContributorsViewModel by sharedViewModel()
+    private val viewModel: ContributorsViewModel by viewModel()
 
     private var adapter: ContributorsListAdapter by autoCleared()
 
     private var binding: FragmentContributorsBinding by autoCleared()
-
-    private var bottomSheetBehavior: BottomSheetBehavior<FragmentContainerView> by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,16 +38,14 @@ class ContributorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentContributorsBinding.bind(view).apply {
             lifecycleOwner = this@ContributorsFragment
-            BottomSheetBehavior.from(containerBottomSheet).apply {
-                state = STATE_HIDDEN
-            }.also {
-                this@ContributorsFragment.bottomSheetBehavior = it
-            }
             list.apply {
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = ContributorsListAdapter {
-                    viewModel.notifyContributorSelected(it)
+                    findNavController().navigate(
+                        ContributorsFragmentDirections
+                            .actionContributorsFragmentToContributorDetailFragment(it)
+                    )
                 }.also {
                     this@ContributorsFragment.adapter = it
                 }
@@ -66,10 +65,6 @@ class ContributorsFragment : Fragment() {
                     }
                 }
             )
-        }
-
-        viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
-            bottomSheetBehavior.state = STATE_EXPANDED
         }
     }
 

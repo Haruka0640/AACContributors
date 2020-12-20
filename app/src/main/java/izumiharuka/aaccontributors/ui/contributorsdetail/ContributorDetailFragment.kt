@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorDetailBinding
-import izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel
 import izumiharuka.aaccontributors.utils.autoCleared
 import izumiharuka.aaccontributors.utils.showErrorMessage
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ContributorDetailFragment : Fragment() {
+class ContributorDetailFragment : BottomSheetDialogFragment() {
 
-    private val viewModel: ContributorsViewModel by sharedViewModel()
+    private val viewModel: ContributorsDetailViewModel by viewModel()
 
     private var binding: FragmentContributorDetailBinding by autoCleared()
+
+    private val args: ContributorDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,17 +31,20 @@ class ContributorDetailFragment : Fragment() {
             lifecycleOwner = this@ContributorDetailFragment
         }
 
-        viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
-            viewModel.getAccountDetail()
-        }
-
         viewModel.accountDetail.observe(viewLifecycleOwner) { result ->
             result?.fold(
                 onSuccess = { binding.contributor = it },
-                onFailure = { showErrorMessage(it){ viewModel.getAccountDetail() } }
+                onFailure = {
+                    showErrorMessage(it) { viewModel.getAccountDetail(args.contributor.login) }
+                }
             )
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAccountDetail(args.contributor.login)
     }
 
 

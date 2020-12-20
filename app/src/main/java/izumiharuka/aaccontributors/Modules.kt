@@ -4,6 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import izumiharuka.aaccontributors.data.GitHubRepository
 import izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel
+import izumiharuka.aaccontributors.ui.contributorsdetail.ContributorsDetailViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -48,4 +49,5 @@ val Modules = module {
     single { GitHubRepository(get()) }
 
     viewModel { ContributorsViewModel(get()) }
+    viewModel { ContributorsDetailViewModel(get()) }
 }

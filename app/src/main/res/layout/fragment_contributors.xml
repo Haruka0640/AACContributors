@@ -51,17 +51,6 @@
                 tools:listitem="@layout/view_item_contributors" />
         </androidx.core.widget.NestedScrollView>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/container_bottom_sheet"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:elevation="4dp"
-            app:behavior_hideable="true"
-            app:defaultNavHost="true"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:navGraph="@navigation/detail_nav_graph" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
