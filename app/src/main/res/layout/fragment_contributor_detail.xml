@@ -31,13 +31,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_avatar"
-            android:layout_width="@dimen/contributors_avatar_icon_size"
-            android:layout_height="@dimen/contributors_avatar_icon_size"
+            android:layout_width="@dimen/contributors_detail_avatar_icon_size"
+            android:layout_height="@dimen/contributors_detail_avatar_icon_size"
             android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/text_company"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toTopOf="@id/text_bio"
             app:layout_constraintEnd_toStartOf="@id/space_image_avator_end"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_name"
+            app:layout_constraintTop_toBottomOf="@id/text_login"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Circle"
             tools:src="@mipmap/ic_launcher" />
 
@@ -54,9 +55,10 @@
             android:layout_height="wrap_content"
             android:text="@{@string/contributors_name(contributor.name)}"
             android:textAppearance="?attr/textAppearanceCaption"
+            visibleOrGone="@{contributor.name != null}"
             app:layout_constraintBottom_toTopOf="@id/text_location"
             app:layout_constraintStart_toEndOf="@id/space_image_avator_end"
-            app:layout_constraintTop_toBottomOf="@id/text_login"
+            app:layout_constraintTop_toTopOf="@id/image_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Name: Danny Johnson" />
 
@@ -66,8 +68,9 @@
             android:layout_height="wrap_content"
             android:text="@{@string/contributors_location(contributor.location)}"
             android:textAppearance="?attr/textAppearanceCaption"
+            visibleOrGone="@{contributor.location != null}"
             app:layout_constraintBottom_toTopOf="@id/text_company"
-            app:layout_constraintStart_toStartOf="@id/text_name"
+            app:layout_constraintStart_toEndOf="@id/space_image_avator_end"
             app:layout_constraintTop_toBottomOf="@id/text_name"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Location: Hateno, Hyrule" />
@@ -78,7 +81,8 @@
             android:layout_height="wrap_content"
             android:text="@{@string/contributors_company(contributor.company)}"
             android:textAppearance="?attr/textAppearanceCaption"
-            app:layout_constraintStart_toStartOf="@id/text_location"
+            visibleOrGone="@{contributor.company != null}"
+            app:layout_constraintStart_toEndOf="@id/space_image_avator_end"
             app:layout_constraintTop_toBottomOf="@id/text_location"
             app:layout_constraintBottom_toBottomOf="@id/image_avatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +94,7 @@
             android:layout_height="wrap_content"
             android:text="@{contributor.bio}"
             android:layout_margin="10dp"
+            visibleOrGone="@{contributor.bio != null}"
             app:layout_constraintBottom_toTopOf="@id/button_twitter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +105,8 @@
         <ImageButton
             android:id="@+id/button_twitter"
             style="@style/ImageButton.Social"
+            tools:visibility="gone"
+            visibleOrGone="@{contributor.twitterUsername != null}"
             android:src="@drawable/ic_twitter_logo_blue"
             app:layout_constraintEnd_toStartOf="@id/button_gitHub"
             app:layout_constraintTop_toBottomOf="@id/text_bio"
@@ -116,6 +123,8 @@
         <ImageButton
             android:id="@+id/button_mail"
             style="@style/ImageButton.Social"
+            tools:visibility="gone"
+            visibleOrGone="@{contributor.email != null}"
             android:src="@drawable/ic_baseline_mail_24"
             android:text="@string/contributors_github"
             app:layout_constraintEnd_toEndOf="parent"

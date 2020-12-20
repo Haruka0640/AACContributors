@@ -5,9 +5,9 @@
     </style>
 
     <style name="ImageButton.Social" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="backgroundTint">@android:color/transparent</item>
         <item name="android:layout_width">@dimen/button_social_size</item>
         <item name="android:layout_height">@dimen/button_social_size</item>
     </style>
-
 </resources>
