@@ -10,7 +10,7 @@ class AACContributors : Application() {
 
         startKoin(
             this, listOf(
-                Modules
+                CoreModules, ContributorsModule
             )
         )
     }

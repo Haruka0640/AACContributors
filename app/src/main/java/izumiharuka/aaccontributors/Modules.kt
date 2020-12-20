@@ -14,7 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit
 import java.util.concurrent.TimeUnit
 
-val Modules = module {
+val CoreModules = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl(Environment.Api.BASE_URL)
@@ -43,8 +43,10 @@ val Modules = module {
             .add(KotlinJsonAdapterFactory())
             .build()
     }
+}
 
-    single { Injection.provideContributorsDataSource(get()) }
+val ContributorsModule = module {
+    single { Injection.provideGitHubDataSource(get()) }
 
     single { GitHubRepository(get()) }
 

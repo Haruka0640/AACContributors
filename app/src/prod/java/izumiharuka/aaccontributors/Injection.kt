@@ -7,6 +7,6 @@ import retrofit2.Retrofit
 
 object Injection {
 
-    fun provideContributorsDataSource(retrofit: Retrofit): GitHubDataSource =
+    fun provideGitHubDataSource(retrofit: Retrofit): GitHubDataSource =
         GitHubRemoteDataSource(retrofit.create(GitHubApi::class.java))
 }

@@ -9,7 +9,7 @@ import kotlin.random.Random
 
 object Injection {
 
-    fun provideContributorsDataSource(mockRetrofit: MockRetrofit) =
+    fun provideGitHubDataSource(mockRetrofit: MockRetrofit) =
         object : GitHubDataSource {
             override suspend fun getRepositoryContributors(
                 owner: String,
