@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
     compileSdkVersion 29
@@ -28,9 +28,10 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
+
 
     flavorDimensions 'datasource'
     productFlavors {
