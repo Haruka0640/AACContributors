@@ -21,9 +21,6 @@ class ContributorsViewModel(
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
 
-    private val _repository = MutableLiveData<Result<Repository>>()
-    val repository: LiveData<Result<Repository>> = _repository
-
     private val _contributorSelectedEvent = MutableLiveData<Event<Account>>()
     val contributorSelectedEvent: LiveData<Event<Account>> = _contributorSelectedEvent
 
@@ -32,20 +29,6 @@ class ContributorsViewModel(
 
     fun getInfo(){
         getRepositoryContributors()
-        getRepositoryInfo()
-    }
-
-    fun getRepositoryInfo(){
-        val owner = _activeRepo.value?.first ?: return
-        val repo = _activeRepo.value?.second ?: return
-
-        viewModelScope.launch {
-            kotlin.runCatching {
-                gitHubRepository.getRepository(owner, repo)
-            }.let{
-                _repository.postValue(it)
-            }
-        }
     }
 
     fun getRepositoryContributors() {

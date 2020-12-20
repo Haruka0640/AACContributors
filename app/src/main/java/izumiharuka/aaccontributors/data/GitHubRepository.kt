@@ -8,9 +8,6 @@ class GitHubRepository(
     suspend fun getRepositoryContributors(owner: String, repo: String): List<Account> =
         dataSource.getRepositoryContributors(owner, repo)
 
-    suspend fun getRepository(owner: String, repo: String): Repository =
-        dataSource.getRepository(owner, repo)
-
     suspend fun getAccountDetail(login: String): AccountDetail =
         dataSource.getAccountDetail(login)
 }

@@ -69,20 +69,6 @@ class ContributorsFragment : Fragment() {
             )
         }
 
-        viewModel.repository.observe(viewLifecycleOwner) { result ->
-            result?.fold(
-                onSuccess = { },
-                onFailure = {
-                    showErrorMessage(
-                        it,
-                        messageText = R.string.error_api_get_repository_common
-                    ) {
-                        viewModel.getRepositoryInfo()
-                    }
-                }
-            )
-        }
-
         viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
             bottomSheetBehavior.state = STATE_COLLAPSED
         }

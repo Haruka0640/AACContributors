@@ -13,7 +13,4 @@ class GitHubRemoteDataSource(
 
     override suspend fun getAccountDetail(login: String): AccountDetail  =
         api.getAccountDetail(login)
-
-    override suspend fun getRepository(owner: String, repo: String): Repository =
-        api.getRepository(owner, repo)
 }
