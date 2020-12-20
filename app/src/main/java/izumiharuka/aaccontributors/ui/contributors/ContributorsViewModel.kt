@@ -15,19 +15,24 @@ class ContributorsViewModel(
     private val gitHubRepository: GitHubRepository
 ): ViewModel() {
 
-    private val _activeRepo = MutableLiveData(Pair(DEFAULT_OWNER, DEFAULT_REPO))
-    val activeRepo: LiveData<Pair<String, String>> = _activeRepo
+    private val _owner = MutableLiveData<String>()
+    val owner: LiveData<String> = _owner
+
+    private val _repo = MutableLiveData<String>()
+    val repo: LiveData<String> = _repo
 
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
 
-    fun getInfo(){
+    fun start(){
+        _owner.value = DEFAULT_OWNER
+        _repo.value = DEFAULT_REPO
         getRepositoryContributors()
     }
 
     fun getRepositoryContributors() {
-        val owner = _activeRepo.value?.first ?: return
-        val repo = _activeRepo.value?.second ?: return
+        val owner = _repo.value ?: return
+        val repo = _owner.value ?: return
         viewModelScope.launch {
             kotlin.runCatching {
                 gitHubRepository.getRepositoryContributors(owner, repo)
@@ -36,7 +41,6 @@ class ContributorsViewModel(
             }
         }
     }
-
     companion object {
         const val DEFAULT_OWNER = "android"
         const val DEFAULT_REPO = "architecture-components-samples"

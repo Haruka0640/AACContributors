@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="contributor"
             type="izumiharuka.aaccontributors.data.AccountDetail" />
@@ -53,7 +52,7 @@
             android:id="@+id/text_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{@string/contributors_name(contributor.name)}"
+            android:text="@{@string/contributors_detail_name(contributor.name)}"
             android:textAppearance="?attr/textAppearanceCaption"
             visibleOrGone="@{contributor.name != null}"
             app:layout_constraintBottom_toTopOf="@id/text_location"
@@ -66,7 +65,7 @@
             android:id="@+id/text_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{@string/contributors_location(contributor.location)}"
+            android:text="@{@string/contributors_detail_location(contributor.location)}"
             android:textAppearance="?attr/textAppearanceCaption"
             visibleOrGone="@{contributor.location != null}"
             app:layout_constraintBottom_toTopOf="@id/text_company"
@@ -79,7 +78,7 @@
             android:id="@+id/text_company"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{@string/contributors_company(contributor.company)}"
+            android:text="@{@string/contributors_detail_company(contributor.company)}"
             android:textAppearance="?attr/textAppearanceCaption"
             visibleOrGone="@{contributor.company != null}"
             app:layout_constraintStart_toEndOf="@id/space_image_avator_end"
@@ -126,7 +125,6 @@
             tools:visibility="gone"
             visibleOrGone="@{contributor.email != null}"
             android:src="@drawable/ic_baseline_mail_24"
-            android:text="@string/contributors_github"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_bio"
             android:contentDescription="@string/image_button_description_mail"/>

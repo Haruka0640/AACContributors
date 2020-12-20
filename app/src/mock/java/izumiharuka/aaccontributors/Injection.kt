@@ -16,7 +16,7 @@ object Injection {
                 repo: String
             ): List<Account> =
                 mockRetrofit.create(GitHubApi::class.java).returningResponse(
-                    List(randomInt(0..20)) {
+                    List(randomInt(0..50)) {
                         makeRandomInstance(Account::class.java)?.copy(
                             avatarUrl = "https://loremflickr.com/320/240"
                         )

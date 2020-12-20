@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="izumiharuka.aaccontributors.ui.contributors.ContributorsViewModel" />
+
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
@@ -17,7 +24,8 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
@@ -28,11 +36,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:title="@string/app_name">
+                    app:title="@string/toolbar_title">
 
                 </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <TextView
+                android:id="@+id/textRepo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorAccent"
+                android:padding="4dp"
+                tools:text="Repository: hoge/hogehoge"
+                android:text="@{@string/contributors_repo(viewModel.owner, viewModel.repo)}"
+                app:layout_scrollFlags="scroll|enterAlways"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -51,6 +69,15 @@
                 tools:context=".ui.contributors.ContributorsFragment"
                 tools:listitem="@layout/view_item_contributors" />
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_refresh_24"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="@string/fab_description_refresh" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

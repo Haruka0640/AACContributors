@@ -1,22 +1,17 @@
 package izumiharuka.aaccontributors.ui.contributors
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
 import izumiharuka.aaccontributors.utils.showErrorMessage
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -39,6 +34,7 @@ class ContributorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentContributorsBinding.bind(view).apply {
             lifecycleOwner = this@ContributorsFragment
+            viewModel = this@ContributorsFragment.viewModel
             list.apply {
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -51,13 +47,15 @@ class ContributorsFragment : Fragment() {
                     this@ContributorsFragment.adapter = it
                 }
             }
+            fab.setOnClickListener {
+                this@ContributorsFragment.viewModel.getRepositoryContributors()
+            }
         }
 
         viewModel.contributors.observe(viewLifecycleOwner) { result ->
             result?.fold(
                 onSuccess = { adapter.submitList(it) },
                 onFailure = {
-                    Log.e("error", "", it)
                     showErrorMessage(
                         view = binding.coordinator,
                         messageText = R.string.error_api_get_contributors_common
@@ -72,6 +70,6 @@ class ContributorsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getInfo()
+        viewModel.start()
     }
 }
