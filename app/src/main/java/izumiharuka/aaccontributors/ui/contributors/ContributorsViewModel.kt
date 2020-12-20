@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import izumiharuka.aaccontributors.data.Contributor
+import izumiharuka.aaccontributors.data.Account
 import izumiharuka.aaccontributors.data.ContributorsRepository
 import kotlinx.coroutines.launch
 
@@ -15,11 +15,11 @@ class ContributorsViewModel(
     private val _activeRepo = MutableLiveData(Pair(DEFAULT_OWNER, DEFAULT_REPO))
     val activeRepo: LiveData<Pair<String, String>> = _activeRepo
 
-    private val _contributors = MutableLiveData<Result<List<Contributor>>>()
-    val contributors: LiveData<Result<List<Contributor>>> = _contributors
+    private val _contributors = MutableLiveData<Result<List<Account>>>()
+    val contributors: LiveData<Result<List<Account>>> = _contributors
 
-    private val _selectedContributor = MutableLiveData<Contributor>()
-    val selectedContributor: LiveData<Contributor> = _selectedContributor
+    private val _selectedContributor = MutableLiveData<Account>()
+    val selectedContributor: LiveData<Account> = _selectedContributor
 
     fun getInfo(){
         getContributorsInfo()
@@ -44,7 +44,7 @@ class ContributorsViewModel(
         }
     }
 
-    fun select(contributor: Contributor){
+    fun select(contributor: Account){
         _selectedContributor.postValue(contributor)
     }
 

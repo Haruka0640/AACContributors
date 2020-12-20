@@ -1,9 +1,7 @@
 package izumiharuka.aaccontributors.data.source.remote
 
-import izumiharuka.aaccontributors.data.Contributor
-import izumiharuka.aaccontributors.data.source.ContributorsDataSource
-import retrofit2.Call
-import retrofit2.Response
+import izumiharuka.aaccontributors.data.Account
+import izumiharuka.aaccontributors.data.Repository
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -13,5 +11,11 @@ interface ContributorsApi{
     suspend fun getContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String
-    ): List<Contributor>
+    ): List<Account>
+
+    @GET("/repos/{owner}/{repo}")
+    suspend fun getRepository(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String
+    ): Repository
 }

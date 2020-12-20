@@ -7,7 +7,7 @@
 
         <variable
             name="contributor"
-            type="izumiharuka.aaccontributors.data.Contributor" />
+            type="izumiharuka.aaccontributors.data.Account" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
