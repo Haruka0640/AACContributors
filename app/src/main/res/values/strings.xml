@@ -7,6 +7,11 @@
     <string name="contributors_mail">Mail: %s</string>
     <string name="contributors_twitter">/@%s</string>
     <string name="contributors_github">Open Github</string>
+
+    <string name="image_button_description_twitter">button to open Twitter</string>
+    <string name="image_button_description_github">button to open Github</string>
+    <string name="image_button_description_mail">button to open email</string>
+
     <string name="error_api_common">Failed to request</string>
     <string name="error_api_get_contributors_common">Failed to load contributors</string>
 </resources>

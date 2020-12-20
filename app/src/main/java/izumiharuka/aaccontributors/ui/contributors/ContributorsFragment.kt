@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
@@ -70,7 +69,7 @@ class ContributorsFragment : Fragment() {
         }
 
         viewModel.contributorSelectedEvent.observe(viewLifecycleOwner) {
-            bottomSheetBehavior.state = STATE_COLLAPSED
+            bottomSheetBehavior.state = STATE_EXPANDED
         }
     }
 
