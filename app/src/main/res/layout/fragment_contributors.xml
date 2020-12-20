@@ -18,7 +18,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="180dp"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -52,6 +52,12 @@
                 android:text="@{@string/contributors_repo(viewModel.owner, viewModel.repo)}"
                 app:layout_scrollFlags="scroll|enterAlways"/>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            visibleOrGone="@{viewModel.isLoading}"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

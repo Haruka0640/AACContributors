@@ -24,6 +24,9 @@ class ContributorsViewModel(
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
 
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading : LiveData<Boolean> = _isLoading
+
     fun start(){
         _owner.value = DEFAULT_OWNER
         _repo.value = DEFAULT_REPO
@@ -34,10 +37,12 @@ class ContributorsViewModel(
         val owner = _repo.value ?: return
         val repo = _owner.value ?: return
         viewModelScope.launch {
+            _isLoading.postValue(true)
             kotlin.runCatching {
                 gitHubRepository.getRepositoryContributors(owner, repo)
             }.let{
                 _contributors.postValue(it)
+                _isLoading.postValue(false)
             }
         }
     }

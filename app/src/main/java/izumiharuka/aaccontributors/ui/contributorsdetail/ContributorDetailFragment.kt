@@ -33,6 +33,7 @@ class ContributorDetailFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentContributorDetailBinding.bind(view).apply {
             lifecycleOwner = this@ContributorDetailFragment
+            viewModel = this@ContributorDetailFragment.viewModel
             Glide.with(requireContext()).load(args.contributor.avatarUrl).into(imageAvatar)
         }
 

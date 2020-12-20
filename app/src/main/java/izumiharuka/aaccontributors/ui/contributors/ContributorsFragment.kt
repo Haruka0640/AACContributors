@@ -66,6 +66,10 @@ class ContributorsFragment : Fragment() {
                 }
             )
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+
+        }
     }
 
     override fun onResume() {

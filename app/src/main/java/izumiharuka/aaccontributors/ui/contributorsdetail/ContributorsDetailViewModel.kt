@@ -18,12 +18,17 @@ class ContributorsDetailViewModel(
     private val _accountDetail = MutableLiveData<Result<AccountDetail>>()
     val accountDetail: LiveData<Result<AccountDetail>> = _accountDetail
 
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading : LiveData<Boolean> = _isLoading
+
     fun getAccountDetail(login: String){
         viewModelScope.launch {
+            _isLoading.postValue(true)
             kotlin.runCatching {
                 gitHubRepository.getAccountDetail(login)
             }.let{
                 _accountDetail.postValue(it)
+                _isLoading.postValue(false)
             }
         }
     }
