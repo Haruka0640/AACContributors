@@ -15,7 +15,6 @@ import izumiharuka.aaccontributors.utils.launchUri
 import izumiharuka.aaccontributors.utils.showErrorMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class ContributorDetailFragment : BottomSheetDialogFragment() {
 
     private val viewModel: ContributorsDetailViewModel by viewModel()

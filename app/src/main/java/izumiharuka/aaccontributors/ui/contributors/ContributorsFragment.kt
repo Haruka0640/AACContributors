@@ -11,12 +11,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
+import izumiharuka.aaccontributors.utils.navigateSafe
 import izumiharuka.aaccontributors.utils.showErrorMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A fragment representing a list of Items.
- */
 class ContributorsFragment : Fragment() {
 
     private val viewModel: ContributorsViewModel by viewModel()
@@ -39,7 +37,7 @@ class ContributorsFragment : Fragment() {
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = ContributorsListAdapter {
-                    findNavController().navigate(
+                    findNavController().navigateSafe(
                         ContributorsFragmentDirections
                             .actionContributorsFragmentToContributorDetailFragment(it)
                     )

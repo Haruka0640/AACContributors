@@ -23,7 +23,6 @@ class ContributorsViewModel(
 
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
-
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading : LiveData<Boolean> = _isLoading
 
@@ -34,8 +33,8 @@ class ContributorsViewModel(
     }
 
     fun getRepositoryContributors() {
-        val owner = _repo.value ?: return
-        val repo = _owner.value ?: return
+        val owner = _owner.value ?: return
+        val repo = _repo.value ?: return
         viewModelScope.launch {
             _isLoading.postValue(true)
             kotlin.runCatching {

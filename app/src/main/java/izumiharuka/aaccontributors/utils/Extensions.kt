@@ -2,9 +2,12 @@ package izumiharuka.aaccontributors.utils
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -31,6 +34,14 @@ fun Fragment.showErrorMessage(
     ).setAction(
         actionText, action
     ).show()
+}
+
+fun NavController.navigateSafe(direction: NavDirections){
+    kotlin.runCatching {
+        navigate(direction)
+    }.onFailure {
+        Log.i("info", "navigation skipped due to: ", it)
+    }
 }
 
 fun Fragment.launchUri(uri: String, onFailure: (Throwable) -> Unit = {}) {
