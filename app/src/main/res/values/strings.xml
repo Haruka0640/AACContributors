@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AAC Contributors</string>
 
-    <string name="error_api_get_contributors_unknown">Failed to load contributors</string>
+    <string name="error_api_common">Failed to request</string>
+    <string name="error_api_get_contributors_common">Failed to load contributors</string>
+    <string name="error_api_get_repository_common">Failed to load repository</string>
 </resources>

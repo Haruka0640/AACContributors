@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import com.google.android.material.snackbar.Snackbar
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorsBinding
 import izumiharuka.aaccontributors.utils.autoCleared
+import izumiharuka.aaccontributors.utils.showErrorMessage
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
@@ -47,7 +47,7 @@ class ContributorsFragment : Fragment() {
                 layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = ContributorsListAdapter {
-                    viewModel.select(it)
+                    viewModel.selectContributor(it)
                 }.also {
                     this@ContributorsFragment.adapter = it
                 }
@@ -58,13 +58,27 @@ class ContributorsFragment : Fragment() {
             result?.fold(
                 onSuccess = { adapter.submitList(it) },
                 onFailure = {
-                    Snackbar.make(
-                        binding.root,
-                        R.string.error_api_get_contributors_unknown,
-                        Snackbar.LENGTH_LONG
-                    ).setAction(R.string.retry) {
-                        viewModel.getInfo()
-                    }.show()
+                    showErrorMessage(
+                        it,
+                        messageText = R.string.error_api_get_contributors_common
+                    )
+                    {
+                        viewModel.getContributorsInfo()
+                    }
+                }
+            )
+        }
+
+        viewModel.repository.observe(viewLifecycleOwner) { result ->
+            result?.fold(
+                onSuccess = { },
+                onFailure = {
+                    showErrorMessage(
+                        it,
+                        messageText = R.string.error_api_get_repository_common
+                    ) {
+                        viewModel.getRepositoryInfo()
+                    }
                 }
             )
         }

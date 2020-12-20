@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import izumiharuka.aaccontributors.data.Account
 import izumiharuka.aaccontributors.data.GitHubRepository
+import izumiharuka.aaccontributors.data.Repository
 import kotlinx.coroutines.launch
 
 class ContributorsViewModel(
-    private val contributorsRepository: GitHubRepository
+    private val gitHubRepository: GitHubRepository
 ): ViewModel() {
 
     private val _activeRepo = MutableLiveData(Pair(DEFAULT_OWNER, DEFAULT_REPO))
@@ -17,6 +18,9 @@ class ContributorsViewModel(
 
     private val _contributors = MutableLiveData<Result<List<Account>>>()
     val contributors: LiveData<Result<List<Account>>> = _contributors
+
+    private val _repository = MutableLiveData<Result<Repository>>()
+    val repository: LiveData<Result<Repository>> = _repository
 
     private val _selectedContributor = MutableLiveData<Account>()
     val selectedContributor: LiveData<Account> = _selectedContributor
@@ -27,8 +31,15 @@ class ContributorsViewModel(
     }
 
     fun getRepositoryInfo(){
+        val owner = _activeRepo.value?.first ?: return
+        val repo = _activeRepo.value?.second ?: return
+
         viewModelScope.launch {
-            kotlin.runCatching {  }
+            kotlin.runCatching {
+                gitHubRepository.getRepository(owner, repo)
+            }.let{
+                _repository.postValue(it)
+            }
         }
     }
 
@@ -37,14 +48,14 @@ class ContributorsViewModel(
         val repo = _activeRepo.value?.second ?: return
         viewModelScope.launch {
             kotlin.runCatching {
-                contributorsRepository.getContributors(owner, repo)
+                gitHubRepository.getContributors(owner, repo)
             }.let{
                 _contributors.postValue(it)
             }
         }
     }
 
-    fun select(contributor: Account){
+    fun selectContributor(contributor: Account){
         _selectedContributor.postValue(contributor)
     }
 
