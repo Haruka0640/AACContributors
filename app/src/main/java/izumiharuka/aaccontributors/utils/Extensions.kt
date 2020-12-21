@@ -1,10 +1,13 @@
 package izumiharuka.aaccontributors.utils
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -22,21 +25,20 @@ fun <T> Moshi.listAdapter(type: Class<T>): JsonAdapter<List<T>> = adapter(
 fun Fragment.showErrorMessage(
     @StringRes
     messageText: Int = R.string.error_api_common,
-    view: View,
+    rootView: View? = view?.rootView,
     @StringRes
-    actionText: Int = R.string.retry,
-    action: (View) -> Unit
+    actionText: Int? = null,
+    action: (View) -> Unit = {}
 ) {
-    Snackbar.make(
-        view,
-        messageText,
-        Snackbar.LENGTH_INDEFINITE
-    ).setAction(
-        actionText, action
-    ).show()
+    rootView?.let{
+        with(Snackbar.make(it, messageText, Snackbar.LENGTH_INDEFINITE)){
+            actionText?.let{ setAction(actionText, action) }
+            show()
+        }
+    }
 }
 
-fun NavController.navigateSafe(direction: NavDirections){
+fun NavController.navigateSafe(direction: NavDirections) {
     kotlin.runCatching {
         navigate(direction)
     }.onFailure {
@@ -44,14 +46,17 @@ fun NavController.navigateSafe(direction: NavDirections){
     }
 }
 
-fun Fragment.launchUri(uri: String, onFailure: (Throwable) -> Unit = {}) {
+fun Fragment.launchUri(uri: String) {
     kotlin.runCatching {
-        with(Intent()) {
-            action = Intent.ACTION_VIEW
-            data = Uri.parse(uri)
-            startActivity(this)
-        }
-    }.onFailure(onFailure)
+        CustomTabsIntent
+            .Builder()
+            .build()
+            .launchUrl(requireContext(), Uri.parse(uri))
+    }.onFailure{
+        showErrorMessage(
+            messageText = R.string.error_open_twitter
+        )
+    }
 }
 
 fun Fragment.launchMail(
@@ -70,3 +75,8 @@ fun Fragment.launchMail(
         }
     }.onFailure(onFailure)
 }
+
+fun PackageManager.isAppInstalled(packageName: String) =
+    kotlin.runCatching {
+        getPackageInfo(packageName, 0)
+    }.isSuccess

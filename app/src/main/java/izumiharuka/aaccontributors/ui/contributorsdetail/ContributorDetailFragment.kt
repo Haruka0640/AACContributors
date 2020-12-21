@@ -1,5 +1,7 @@
 package izumiharuka.aaccontributors.ui.contributorsdetail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +11,9 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import izumiharuka.aaccontributors.R
 import izumiharuka.aaccontributors.databinding.FragmentContributorDetailBinding
-import izumiharuka.aaccontributors.utils.autoCleared
-import izumiharuka.aaccontributors.utils.launchMail
-import izumiharuka.aaccontributors.utils.launchUri
-import izumiharuka.aaccontributors.utils.showErrorMessage
+import izumiharuka.aaccontributors.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class ContributorDetailFragment : BottomSheetDialogFragment() {
 
@@ -48,18 +48,26 @@ class ContributorDetailFragment : BottomSheetDialogFragment() {
                             account.email?.let { mail -> launchMail(mail) }
                         }
                         buttonTwitter.setOnClickListener {
-                            launchUri(
-                                "twitter://user?screen_name=$it",
-                                onFailure = { _ ->
-                                    launchUri("https://twitter.com/$it")
+                            if (requireContext().packageManager.isAppInstalled("com.twitter.android")) {
+                                kotlin.runCatching {
+                                    val uri = Uri.parse("twitter://user?user_id=$it")
+                                    with(Intent(Intent.ACTION_VIEW, uri)){
+                                        startActivity(this)
+                                    }
+                                }.onFailure {
+                                    showErrorMessage(
+                                        messageText = R.string.error_open_twitter
+                                    )
                                 }
-                            )
+                            } else {
+                                launchUri("https://twitter.com/$it")
+                            }
                         }
                     }
                 },
                 onFailure = {
                     showErrorMessage(
-                        view = binding.root,
+                        actionText = R.string.retry,
                         action = {
                             viewModel.getAccountDetail(args.contributor.login)
                         }

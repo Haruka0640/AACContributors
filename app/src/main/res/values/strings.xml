@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">AAC Contributors</string>
-
     <string name="toolbar_title">Contributors</string>
     <string name="contributors_repo">Repository: %s/%s</string>
 
@@ -15,4 +13,6 @@
 
     <string name="error_api_common">Failed to request</string>
     <string name="error_api_get_contributors_common">Failed to load contributors</string>
+    <string name="error_open_twitter">Failed to open Twitter</string>
+
 </resources>

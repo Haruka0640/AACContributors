@@ -25,7 +25,11 @@ object Injection {
 
             override suspend fun getAccountDetail(login: String): AccountDetail =
                 mockRetrofit.create(GitHubApi::class.java).returningResponse(
-                    makeRandomInstance(AccountDetail::class.java)
+                    makeRandomInstance(AccountDetail::class.java)?.copy(
+                        twitterUsername = "ppvi",
+                        htmlUrl = "https://github.com/JoseAlcerreca",
+                        email = "fake@example.com"
+                    )
                 ).getAccountDetail(login)
         }
 

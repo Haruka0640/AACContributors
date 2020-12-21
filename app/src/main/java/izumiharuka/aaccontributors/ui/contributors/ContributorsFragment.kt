@@ -55,8 +55,8 @@ class ContributorsFragment : Fragment() {
                 onSuccess = { adapter.submitList(it) },
                 onFailure = {
                     showErrorMessage(
-                        view = binding.coordinator,
-                        messageText = R.string.error_api_get_contributors_common
+                        messageText = R.string.error_api_get_contributors_common,
+                        actionText = R.string.retry
                     )
                     {
                         viewModel.getRepositoryContributors()
