@@ -8,8 +8,3 @@
 ## スクリーンショット
 <img src="https://user-images.githubusercontent.com/44899712/102718505-c902f100-432b-11eb-8288-d1bfa9a89469.png" width=200/>
 <img src="https://user-images.githubusercontent.com/44899712/102718513-dae49400-432b-11eb-883f-a3d301d8d7fe.png" width=200/>
-
-## こだわりポイント
- - 読み込み時のフラストレーション軽減のため、更新ボタン、プログレスバーを実装
- - 登録していない情報があってもレイアウトが崩れないようなConstraintでレイアウトを実装
- - 開発をスムーズにするためにアプリmockを作成
