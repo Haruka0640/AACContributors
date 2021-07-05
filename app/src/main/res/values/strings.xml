@@ -11,7 +11,7 @@
     <string name="image_button_description_mail">button to open email</string>
     <string name="fab_description_refresh">button to refresh list</string>
 
-    <string name="error_api_common">Failed to request</string>
+    <string name="error_api_common">Failed to request!!!!</string>
     <string name="error_api_get_contributors_common">Failed to load contributors</string>
     <string name="error_open_twitter">Failed to open Twitter</string>
 
