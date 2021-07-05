@@ -2,7 +2,7 @@
     <string name="toolbar_title">Contributors</string>
     <string name="contributors_repo">Repository: %s/%s</string>
 
-    <string name="contributors_detail_name">Name: %s</string>
+    <string name="contributors_detail_name">Name: %sa</string>
     <string name="contributors_detail_company">Company: %s</string>
     <string name="contributors_detail_location">Location: %s</string>
 
